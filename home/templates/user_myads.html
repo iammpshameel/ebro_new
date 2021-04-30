@@ -1,0 +1,148 @@
+{% extends 'user dashboard/user_dashboard.html'%}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+	.active_user_page6{
+		background-color: #99c2ff;
+	}
+</style>
+  
+			
+
+			<div class="container">
+			<h2>Deals</h2>
+				<div class="row">
+					{% for i in user_deals_list %}
+					<div class="col-md-2 room-wrap animate-box">
+						{% if i.picture != '' %}
+         				<img src="{{i.picture.url}}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% else %}
+         				<img src="{% static 'images/assign.png' %}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% endif %}
+						<div class="desc text-center">
+							<span class="share"><img src="{% static 'images/share.png' %}" alt="" width="25" height="25"></span>
+							<h5><a href="rooms-suites.html">{{ i.deal_name }}</a></h5>
+							<p class="price">
+								<span class="currency currency-menu">$</span>
+								<span class="price-room price-menu">{{ i.price }}</span>
+							</p>
+							<p><a href="{% url 'detail_view_deals' i.id %}">edit</a></p>
+
+							<form action="{% url 'delete_deal' %}" method="POST">
+								{% csrf_token %}
+
+         					<input type="hidden" value="{{ i.id }}" name="id_delete">
+         					<button>Delete</button>
+            				</form>
+							<p><a class="btn btn-primary btn-book">Deal</a></p>
+						</div>
+					</div>
+					{% endfor %}
+					
+					
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;
+
+			    </div>
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+			<div class="container">
+			<h2>Jobs</h2>
+				<div class="row">
+					{% for i in user_jobs_list %}
+					<div class="col-md-2 room-wrap animate-box">
+						{% if i.picture != '' %}
+         				<img src="{{i.picture.url}}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% else %}
+         				<img src="{% static 'images/assign.png' %}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% endif %}
+						<div class="desc text-center">
+							<span class="share"><img src="{% static 'images/share.png' %}" alt="" width="25" height="25"></span>
+							<h5><a href="rooms-suites.html">{{ i.job_name }}</a></h5>
+							<p class="price">
+								<span class="currency currency-menu">$</span>
+								<span class="price-room price-menu">{{ i.price }}</span>
+							</p>
+							<p><a href="{% url 'detail_view_jobs' i.id %}">edit</a></p>
+
+							<form action="{% url 'delete_job' %}" method="POST">
+								{% csrf_token %}
+
+         					<input type="hidden" value="{{ i.id }}" name="id_delete">
+         					<button>Delete</button>
+            				</form>
+							<p><a class="btn btn-primary btn-book">Job</a></p>
+						</div>
+					</div>
+					{% endfor %}
+					
+					
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;
+
+			    </div>
+		    </div>
+		    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+		    <div class="container">
+		    	<h2>Products</h2>
+				<div class="row">
+					{% for i in user_products_list %}
+					<div class="col-md-2 room-wrap animate-box">
+						{% if i.picture != '' %}
+         				<img src="{{i.picture.url}}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% else %}
+         				<img src="{% static 'images/assign.png' %}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% endif %}
+						<div class="desc text-center">
+							<span class="share"><img src="{% static 'images/share.png' %}" alt="" width="25" height="25"></span>
+							<h5><a href="rooms-suites.html">{{ i.product_name }}</a></h5>
+							<p class="price">
+								<span class="currency currency-menu">$</span>
+								<span class="price-room price-menu">{{ i.price }}</span>
+							</p>
+							<p><a href="{% url 'detail_view_products' i.id %}">edit</a></p>
+
+							<form action="{% url 'delete_product' %}" method="POST">
+								{% csrf_token %}
+
+         					<input type="hidden" value="{{ i.id }}" name="id_delete">
+         					<button>Delete</button>
+            				</form>
+							<p><a class="btn btn-primary btn-book">Product</a></p>
+
+						</div>
+					</div>
+					{% endfor %}
+					
+					
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;
+
+			    </div>
+		    </div>
+		
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+{% endblock %}
+
+
+

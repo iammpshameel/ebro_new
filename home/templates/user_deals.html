@@ -1,0 +1,163 @@
+{% extends 'user dashboard/user_dashboard.html'%}
+
+{% block content %}
+
+{% load static %}
+
+<style>
+	.active_user_page2{
+		background-color: #99c2ff;
+	}
+</style>
+  
+
+
+
+
+	<a href="#"><img src="{% static 'images/add.png' %}" id="addbutton" class="addbutton"></a>
+		<div class=" animate-box deals-form">
+			<br>
+			<input type="submit" value="X" class="btn btn-primary closedeal">
+			<form action="{% url 'deal' %}" method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="row form-group">
+					
+					<div class="col-md-1">
+						<label for="subject">Publish</label><br>
+						<input type="radio" name="publish" value="public" checked="checked">Public<br>
+						<input type="radio" name="publish" value="private">Private 
+				    </div>
+					<div class="col-md-3">
+						<br>[your product or deal will handle by E-bro through private channel]
+				    </div>
+
+				    <div class="col-md-2">
+						<label for="fname">Deal Name</label>
+						<input type="text" name="deal_name" id="fname" class="form-control" placeholder="Your firstname">
+					</div>
+
+					<div class="col-md-1">
+						<label for="subject">Type</label><br>
+						<input type="radio" name="deal_type" value="Single" checked="checked">Single<br>
+						<input type="radio" name="deal_type" value="Multiple">Multiple
+					</div>
+					<div class="col-md-3">
+						<br>[your product can categorize based on brand name or individual]
+				    </div>
+					<div class="col-md-2">
+						<label for="subject">Brand Name</label>
+						<input type="text" name="brand_name" id="subject" class="form-control" placeholder="Your subject of this message">
+					</div>
+					
+				</div>
+
+			
+
+				<div class="row form-group">
+					
+					<div class="col-md-2">
+						<label for="lname">Price</label>
+						<input type="text" name="price" id="lname" class="form-control" placeholder="Your lastname">
+					</div>
+					<div class="col-md-4">
+						<label for="email">Category/Keywords</label>
+						<input type="text" name="category" id="email" class="form-control" placeholder="Your email address">
+					</div>
+
+					
+					
+					
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-2">
+						<label for="fname">Picture</label>
+						<input type="file" name="picture" id="fname" class="form-control" placeholder="Your firstname">
+					</div>
+					<div class="col-md-2">
+						<label for="lname">Attachments</label>
+						<input type="file" name="attachments" id="lname" class="form-control" placeholder="Your lastname" multiple=""/>
+					</div>
+					<div class="col-md-2">
+						<label for="subject">Sort by Location</label>
+						<input type="text" name="location" id="subject" class="form-control" placeholder="Your subject of this message">
+					</div>
+
+					<div class="col-md-6">
+						<label for="message">Other Details</label>
+						<textarea  name="details" value="" id="message" cols="25" rows="2" class="form-control" placeholder="Say something about us">
+						</textarea>
+					</div>	
+					
+				</div>
+				
+				<div class="row form-group">
+				<div class="form-group text-center">
+					<input type="submit" value="Add Deal" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+				</div>
+				</div>
+			</form>
+		</div>
+
+
+
+
+
+		    <div class="container">
+
+				<div class="row">
+					{% for i in user_deals_list %}
+					<div class="col-md-2 room-wrap animate-box">
+						{% if i.picture != '' %}
+         				<img src="{{i.picture.url}}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% else %}
+         				<img src="{% static 'images/assign.png' %}" alt="" width="150" height="150" class="image-popup-link"/>
+         				{% endif %}
+						<div class="desc text-center">
+							<span class="share"><img src="{% static 'images/share.png' %}" alt="" width="25" height="25"></span>
+							<h5><a href="rooms-suites.html">{{ i.deal_name }}</a></h5>
+							<p class="price">
+								<span class="currency currency-menu">$</span>
+								<span class="price-room price-menu">{{ i.price }}</span>
+							</p>
+							<p><a class="btn btn-primary btn-book">Deal</a></p>
+						</div>
+					</div>
+					{% endfor %}
+					
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="col-md-12 text-center animate-box">
+						<a href="#">Next Page <i class="icon-arrow-right3"></i></a>
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+
+			    </div>
+		    </div>
+		
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+		
+		
+
+	<script>
+		document.getElementById("addbutton").addEventListener("click",function(){
+		  document.querySelector(".deals-form").style.display = "flex";
+		})
+		document.querySelector(".closedeal").addEventListener("click",function(){
+			document.querySelector(".deals-form").style.display = "none";
+		  })
+		
+	
+	</script>
+
+
+
+{% endblock %}
